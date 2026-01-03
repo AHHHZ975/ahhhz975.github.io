@@ -6,50 +6,7 @@
   <title>Your Name — CV</title>
   <meta name="description" content="Personal academic / CV style site." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b0f17; --panel:#0f1724; --muted:#98a3b2; --accent:#6ee7b7;
-      --text:#e9f2f8; --radius:12px; --navw:220px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#04060a 0%, #081425 100%);color:var(--text);-webkit-font-smoothing:antialiased}
-    a{color:inherit}
-    /* page layout */
-    .container{max-width:1100px;margin:30px auto;padding:0 20px;display:grid;grid-template-columns:var(--navw) 1fr;gap:28px;align-items:start}
-    /* left nav */
-    .nav{position:sticky;top:28px;height:fit-content}
-    .nav .brand{padding:14px;background:var(--panel);border-radius:10px}
-    .brand h2{margin:0;font-size:18px}
-    .brand p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
-    .nav .menu{margin-top:12px;background:var(--panel);padding:10px;border-radius:10px}
-    .menu a{display:block;padding:8px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:14px}
-    .menu a:hover{color:var(--text);background:rgba(255,255,255,0.02)}
-    .menu a.active{color:var(--accent);font-weight:600}
-    /* main content */
-    .main-rail{padding:14px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border-radius:10px}
-    .hero{padding:26px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent)}
-    .hero h1{margin:0;font-size:44px;line-height:1}
-    .hero .subtitle{margin-top:8px;color:var(--muted);font-size:16px}
-    .hero .cta{margin-top:14px}
-    .btn{display:inline-block;background:var(--accent);color:#042027;padding:8px 12px;border-radius:8px;font-weight:700;text-decoration:none}
-    /* sections */
-    section{margin-top:18px}
-    .card{background:var(--panel);padding:18px;border-radius:10px}
-    .card h3{margin:0 0 8px 0}
-    .muted{color:var(--muted)}
-    ul.plain{padding-left:18px;margin:8px 0}
-    ul.plain li{margin:6px 0}
-    /* responsive */
-    @media (max-width:900px){
-      .container{grid-template-columns:1fr;gap:16px}
-      .nav{position:relative;top:0}
-      .brand{display:flex;align-items:center;justify-content:space-between}
-      .menu{display:flex;gap:8px;overflow:auto}
-      .menu a{white-space:nowrap}
-      .hero h1{font-size:32px}
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container" role="document">
@@ -165,38 +122,6 @@
     </main>
   </div>
 
-  <script>
-    // inject year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // smooth scrolling + active link highlight
-    const menuLinks = Array.from(document.querySelectorAll('.menu a'));
-    function onScroll(){
-      const fromTop = window.scrollY + 40;
-      menuLinks.forEach(link => {
-        const section = document.querySelector(link.hash);
-        if(!section) return;
-        const top = section.offsetTop;
-        const bottom = top + section.offsetHeight;
-        if(fromTop >= top && fromTop < bottom) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-    }
-    window.addEventListener('scroll', onScroll, {passive:true});
-    // smooth anchor behavior
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        if(a.hash.length > 1){
-          e.preventDefault();
-          document.querySelector(a.hash).scrollIntoView({behavior:'smooth', block:'start'});
-        }
-      });
-    });
-    // initial highlight
-    onScroll();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
