@@ -3,190 +3,200 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Name — Portfolio</title>
-  <meta name="description" content="Personal site — projects, about, contact." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Your Name — CV</title>
+  <meta name="description" content="Personal academic / CV style site." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b1020; --muted:#9aa4b2; --accent1:#6ee7b7; --accent2:#5bd0ff; --card:#0f1726; --glass: rgba(255,255,255,0.03);
-      --radius:14px; --maxw:1100px; --mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --bg:#0b0f17; --panel:#0f1724; --muted:#98a3b2; --accent:#6ee7b7;
+      --text:#e9f2f8; --radius:12px; --navw:220px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#050612 0%, #071526 100%);color:#e6eef6}
-
-    /* --- Hero (like bruno-roy) --- */
-    .hero-wrap{min-height:76vh;display:flex;align-items:center;justify-content:center;padding:48px 20px;position:relative;overflow:hidden}
-    .hero-bg{
-      position:absolute;inset:0;z-index:0;pointer-events:none;filter:blur(40px);opacity:0.18;background:radial-gradient(circle at 10% 30%, rgba(110,231,183,0.14), transparent 8%), radial-gradient(circle at 80% 70%, rgba(91,208,255,0.12), transparent 12%);
-    }
-    .hero{
-      position:relative;z-index:1;max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:center;align-content:center
-    }
-    .intro-large{padding:36px 36px 36px 44px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(2,6,23,0.6)}
-    .eyebrow{font-size:13px;color:var(--muted);letter-spacing:1px;margin-bottom:12px}
-    .name{font-size:48px;line-height:1;margin:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
-    .tagline{margin-top:10px;color:var(--muted);font-size:18px;max-width:60%}
-    .hero-cta{margin-top:22px;display:flex;gap:12px}
-    .btn{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;padding:10px 16px;border-radius:10px;color:#042027;font-weight:700;cursor:pointer;text-decoration:none}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
-    /* --- Right sidebar (like sahandrez) --- */
-    .side-card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:16px}
-    .avatar{width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#042027;font-size:28px}
-    .meta{margin-top:12px}
-    .meta p{margin:6px 0;color:var(--muted);font-size:14px}
-
-    /* --- Main layout after hero (sahandrez-like) --- */
-    .main{max-width:1100px;margin:36px auto;padding:0 20px;display:grid;grid-template-columns:220px 1fr;gap:28px}
-    .nav-column{position:sticky;top:36px;height:fit-content}
-    .nav-column .profile{background:var(--card);padding:18px;border-radius:12px}
-    .nav-column img{width:100%;border-radius:10px}
-    .nav-links{margin-top:14px;background:var(--card);padding:12px;border-radius:12px}
-    .nav-links a{display:block;color:var(--muted);text-decoration:none;padding:8px 6px;border-radius:8px}
-    .nav-links a:hover{color:var(--accent1);background:rgba(255,255,255,0.012)}
-
-    .content .card{background:var(--card);padding:20px;border-radius:12px}
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-    .project{padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
-    .project h4{margin:0}
-    .project p{color:var(--muted);font-size:14px}
-
-    footer{margin-top:40px;color:var(--muted);text-align:center;padding:24px}
-
-    /* small screens */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      .intro-large{padding:28px}
-      .main{grid-template-columns:1fr;}
-      .nav-column{order:2}
-      .content{order:1}
-    }
-
-    @media (max-width:520px){
-      .name{font-size:34px}
-      .tagline{max-width:100%}
-      .avatar{width:72px;height:72px;font-size:22px}
-    }
-
-    /* subtle utility */
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#04060a 0%, #081425 100%);color:var(--text);-webkit-font-smoothing:antialiased}
     a{color:inherit}
+    /* page layout */
+    .container{max-width:1100px;margin:30px auto;padding:0 20px;display:grid;grid-template-columns:var(--navw) 1fr;gap:28px;align-items:start}
+    /* left nav */
+    .nav{position:sticky;top:28px;height:fit-content}
+    .nav .brand{padding:14px;background:var(--panel);border-radius:10px}
+    .brand h2{margin:0;font-size:18px}
+    .brand p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+    .nav .menu{margin-top:12px;background:var(--panel);padding:10px;border-radius:10px}
+    .menu a{display:block;padding:8px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:14px}
+    .menu a:hover{color:var(--text);background:rgba(255,255,255,0.02)}
+    .menu a.active{color:var(--accent);font-weight:600}
+    /* main content */
+    .main-rail{padding:14px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border-radius:10px}
+    .hero{padding:26px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent)}
+    .hero h1{margin:0;font-size:44px;line-height:1}
+    .hero .subtitle{margin-top:8px;color:var(--muted);font-size:16px}
+    .hero .cta{margin-top:14px}
+    .btn{display:inline-block;background:var(--accent);color:#042027;padding:8px 12px;border-radius:8px;font-weight:700;text-decoration:none}
+    /* sections */
+    section{margin-top:18px}
+    .card{background:var(--panel);padding:18px;border-radius:10px}
+    .card h3{margin:0 0 8px 0}
     .muted{color:var(--muted)}
-    .small{font-size:13px;color:var(--muted)}
+    ul.plain{padding-left:18px;margin:8px 0}
+    ul.plain li{margin:6px 0}
+    /* responsive */
+    @media (max-width:900px){
+      .container{grid-template-columns:1fr;gap:16px}
+      .nav{position:relative;top:0}
+      .brand{display:flex;align-items:center;justify-content:space-between}
+      .menu{display:flex;gap:8px;overflow:auto}
+      .menu a{white-space:nowrap}
+      .hero h1{font-size:32px}
+    }
   </style>
 </head>
 <body>
-  <!-- HERO (Bruno-Roy style start) -->
-  <section class="hero-wrap">
-    <div class="hero-bg" aria-hidden></div>
-    <div class="hero">
-      <div class="intro-large">
-        <div class="eyebrow">Hi — I’m</div>
-        <h1 class="name">Your Name</h1>
-        <p class="tagline">I design and build interfaces and visual systems. I’m currently focused on 3D graphics, ML, and developer tools.</p>
-        <div class="hero-cta">
-          <a class="btn" href="#projects">See my work</a>
-          <a class="btn ghost" href="#contact">Contact</a>
+  <div class="container" role="document">
+    <!-- LEFT NAV -->
+    <aside class="nav" aria-label="Primary">
+      <div class="brand">
+        <div>
+          <h2>Your Name</h2>
+          <p class="muted">PhD candidate — Field / University</p>
         </div>
-        <div class="small" style="margin-top:14px">Based in <strong>Toronto, Canada</strong> — Available for internships & freelance.</div>
       </div>
 
-      <!-- Right column: small profile / contact like sahandrez -->
-      <aside class="side-card">
-        <div style="display:flex;gap:12px;align-items:center">
-          <div class="avatar">Y</div>
-          <div class="meta">
-            <div style="font-weight:700">Your Name</div>
-            <p class="muted" style="margin:6px 0 0 0">Student • Researcher • Developer</p>
+      <nav class="menu" aria-label="Sections" role="navigation">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#awards">Awards</a>
+        <a href="#certifications">Certifications</a>
+      </nav>
+
+      <div style="margin-top:12px" class="card">
+        <div style="font-weight:700">Contact</div>
+        <div class="muted" style="margin-top:6px">you@example.com</div>
+        <div style="margin-top:10px"><a class="btn" href="#" download>Download Resume</a></div>
+      </div>
+    </aside>
+
+    <!-- RIGHT / MAIN -->
+    <main class="main-rail">
+      <!-- HERO -->
+      <header class="hero" role="banner">
+        <h1>Your Name</h1>
+        <div class="subtitle">Short tagline — e.g. PhD candidate in Computer Science focusing on reinforcement learning and ML systems.</div>
+        <div class="cta">
+          <a class="btn" href="#projects">Selected Projects</a>
+        </div>
+      </header>
+
+      <!-- ABOUT -->
+      <section id="about" class="card" tabindex="-1">
+        <h3>About</h3>
+        <p class="muted">Short bio: who you are, where you are, and what you work on. Replace this with 2–4 sentences describing your research and interests.</p>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="card" tabindex="-1">
+        <h3>Education</h3>
+        <ul class="plain">
+          <li><strong>University Name</strong> — PhD in Something (2020 — present). Short details.</li>
+          <li><strong>Previous Univ</strong> — MSc / BSc. Short details.</li>
+        </ul>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="card" tabindex="-1">
+        <h3>Experience</h3>
+        <ul class="plain">
+          <li><strong>Role, Organization</strong> — Short bullets about what you did.</li>
+          <li><strong>Role, Org</strong> — Short bullets.</li>
+        </ul>
+      </section>
+
+      <!-- PUBLICATIONS -->
+      <section id="publications" class="card" tabindex="-1">
+        <h3>Publications</h3>
+        <p class="muted">List your selected publications with short citation links or arXiv / DOI links.</p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="card" tabindex="-1">
+        <h3>Skills</h3>
+        <p class="muted">Python · PyTorch · C++ · ML · RL · Git · Linux</p>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="card" tabindex="-1">
+        <h3>Selected projects</h3>
+        <div style="margin-top:8px">
+          <div style="margin-bottom:12px">
+            <strong>Project One</strong>
+            <div class="muted">Short description of project. <a href="#" class="muted">Code →</a></div>
+          </div>
+          <div style="margin-bottom:12px">
+            <strong>Project Two</strong>
+            <div class="muted">Short description. <a href="#" class="muted">Demo →</a></div>
           </div>
         </div>
+      </section>
 
-        <div style="margin-top:14px">
-          <div class="small">Contact</div>
-          <div style="margin-top:6px"><a href="mailto:you@example.com" class="small" style="color:var(--accent1);text-decoration:none">you@example.com</a></div>
-        </div>
+      <!-- AWARDS -->
+      <section id="awards" class="card" tabindex="-1">
+        <h3>Awards</h3>
+        <ul class="plain muted">
+          <li>Award name — Year</li>
+          <li>Award name — Year</li>
+        </ul>
+      </section>
 
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <a href="#projects" class="small">Projects</a>
-          <a href="#about" class="small">About</a>
-          <a href="#contact" class="small">Contact</a>
-        </div>
-      </aside>
-    </div>
-  </section>
+      <!-- CERTIFICATIONS -->
+      <section id="certifications" class="card" tabindex="-1">
+        <h3>Certifications</h3>
+        <ul class="plain muted">
+          <li>Certification — Date</li>
+        </ul>
+      </section>
 
-  <!-- Main content (Sahandrez-like layout) -->
-  <main class="main">
-    <nav class="nav-column">
-      <div class="profile">
-        <img src="https://via.placeholder.com/220x220.png?text=Photo" alt="Your photo" />
-        <div style="margin-top:10px;font-weight:700">Your Name</div>
-        <div class="small">Student • Open to internships</div>
-      </div>
-
-      <div class="nav-links" style="margin-top:12px">
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="#resume">Resume</a>
-      </div>
-    </nav>
-
-    <section class="content">
-      <div class="card" id="projects">
-        <h3>Selected projects</h3>
-        <div class="projects-grid" style="margin-top:12px">
-          <article class="project">
-            <h4>Project One</h4>
-            <p class="muted">Short description of project one. Link to GitHub or demo.</p>
-            <div style="margin-top:8px"><a href="#" class="small" style="color:var(--accent1);text-decoration:none">View on GitHub →</a></div>
-          </article>
-
-          <article class="project">
-            <h4>Project Two</h4>
-            <p class="muted">Short description. Keep it concise.</p>
-          </article>
-
-          <article class="project">
-            <h4>Project Three</h4>
-            <p class="muted">Short description. Replace with your own content.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="card" id="about" style="margin-top:16px">
-        <h3>About</h3>
-        <p class="muted">I’m a student and developer working on 3D graphics and machine learning. I enjoy building tools that make technical work more visual and understandable. Outside of work I like hiking, photography, and low-fi synth music.</p>
-      </div>
-
-      <div class="card" id="contact" style="margin-top:16px">
-        <h3>Contact</h3>
-        <p class="muted">Email: <a href="mailto:you@example.com" style="color:var(--accent1);text-decoration:none">you@example.com</a></p>
-        <p class="muted">Social: <a href="#" style="color:var(--accent1);text-decoration:none">GitHub</a> • <a href="#" style="color:var(--accent1);text-decoration:none">LinkedIn</a></p>
-      </div>
-
-      <div class="card" id="resume" style="margin-top:16px">
-        <h3>Resume</h3>
-        <p class="muted">Download: <a href="#" style="color:var(--accent1);text-decoration:none">PDF</a></p>
-      </div>
-
-      <footer>
-        <small class="muted">Made with ❤️ — replace with your name. • <a href="#" style="color:var(--muted);text-decoration:none">Privacy</a></small>
+      <footer style="margin-top:18px;text-align:center;color:var(--muted);font-size:13px">
+        © <span id="year"></span> Your Name
       </footer>
-    </section>
-  </main>
+    </main>
+  </div>
 
   <script>
-    // smooth scroll for anchor links
+    // inject year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // smooth scrolling + active link highlight
+    const menuLinks = Array.from(document.querySelectorAll('.menu a'));
+    function onScroll(){
+      const fromTop = window.scrollY + 40;
+      menuLinks.forEach(link => {
+        const section = document.querySelector(link.hash);
+        if(!section) return;
+        const top = section.offsetTop;
+        const bottom = top + section.offsetHeight;
+        if(fromTop >= top && fromTop < bottom) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    // smooth anchor behavior
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const href=a.getAttribute('href');
-        if(href.length>1){
+      a.addEventListener('click', e=>{
+        if(a.hash.length > 1){
           e.preventDefault();
-          document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+          document.querySelector(a.hash).scrollIntoView({behavior:'smooth', block:'start'});
         }
       });
     });
+    // initial highlight
+    onScroll();
   </script>
 </body>
 </html>
