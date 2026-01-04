@@ -10,11 +10,37 @@
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-/* Global resets */
+/* Global resets and layout helpers */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#1f2226);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* Make body a column so we can stretch main and push footer */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header stays natural height; main will grow to fill available space */
+main.page {
+  flex: 1 1 auto;
+  display: block;
+}
+
 a{color:var(--accent);text-decoration:none}
-.container{max-width:1100px;margin:32px auto;padding:0 20px;display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+
+/* Grid container: left column + right content */
+.container{
+  max-width:1100px;
+  margin:32px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:28px;
+  align-items:start;
+  /* ensure container can stretch inside main */
+  min-height: 0;
+}
 
 /* Header / topbar */
 .topbar{background:#2b2f36;border-bottom:1px solid rgba(0,0,0,0.2)}
@@ -34,25 +60,50 @@ a{color:var(--accent);text-decoration:none}
 .icons{display:flex;gap:14px;justify-content:center;margin-top:8px}
 .icons a{color:var(--muted);display:inline-flex;align-items:center;gap:8px;font-weight:600}
 
-/* Main content */
-.content .card{background:transparent;padding:0;margin-bottom:14px}
+/* Right column: make it a column so footer can be pushed to bottom */
+.content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* important for flex children in a grid */
+}
+
+/* ---------- CARD STYLES (increased inner spacing) ---------- */
+/* Make biography, interests, education, etc. have comfortable padding */
+.content .card,
+.card {
+  background: var(--panel);
+  padding: 28px;               /* INCREASED padding from 18px -> 28px */
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  margin-bottom: 18px;
+  color: var(--text);
+}
+
+/* If you had a special rule for .bio.card earlier, this keeps heading styling */
 .bio.card h2{font-size:36px;margin:0 0 14px 0}
 .bio.card p{line-height:1.7;color:var(--muted);font-size:16px}
 
 /* two-column interests / education */
 .two-column{display:flex;gap:28px;margin-top:14px}
-.card{background:var(--panel);padding:18px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,0.45)}
 .card h3{margin:0 0 10px 0}
 .card ul{margin:0;padding-left:18px;color:var(--muted)}
 .edu-list li{margin-bottom:12px}
 .edu-list .muted{font-size:14px;color:var(--muted)}
 
-/* footer */
-.footer{margin-top:20px;padding-top:8px}
+/* ---------- Footer pinned to bottom of right column ---------- */
+/* Push footer to the bottom of the .content column */
+.content .footer {
+  margin-top: auto; /* this makes the footer sit at the bottom of the column */
+  padding-top: 8px;
+}
+
+/* footer text styling remains as before */
+.footer .muted { color: var(--muted); }
 
 /* small tweaks / responsive */
 .muted{color:var(--muted)}
 .small{font-size:13px;color:var(--muted)}
+
 @media (max-width:980px){
   .container{grid-template-columns:1fr;gap:20px;padding:0 16px}
   .topbar .topbar-inner{padding-left:12px;padding-right:12px}
