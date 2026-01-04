@@ -4,88 +4,136 @@
   --muted:#a9b1bb;
   --text:#eef5fb;
   --accent:#9cc9ff;
+  --accent-2:#86e6c1;
   --radius:10px;
-  --maxw:1600px; /* big maximum width so content can expand */
+  --maxw:1400px; /* increased so content can be wider on large screens */
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-/* Basic resets */
+/* Global resets and layout helpers */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#1f2226);color:var(--text);-webkit-font-smoothing:antialiased}
-body{display:flex;flex-direction:column;min-height:100vh}
-main.page{flex:1 1 auto;display:block}
+
+/* Make body a column so we can stretch main and push footer */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header stays natural height; main will grow to fill available space */
+main.page {
+  flex: 1 1 auto;
+  display: block;
+}
+
 a{color:var(--accent);text-decoration:none}
 
-/* GRID: left narrow column + wide content column
-   Use minmax to guarantee a large minimum content width. */
+/* Grid container: left column + right content
+   - left column reduced so right column gets more horizontal space
+   - overall container max width increased above */
 .container{
   max-width:var(--maxw);
   margin:32px auto;
   padding:0 20px;
   display:grid;
-  grid-template-columns:220px minmax(900px, 1fr); /* left fixed, right guaranteed at least 900px */
-  gap:36px;
+  grid-template-columns:260px 1fr; /* reduced left column width to give content more room */
+  gap:36px; /* slightly larger gap */
   align-items:start;
   min-height: 0;
 }
 
-/* Header */
+/* Header / topbar - match max width so nav aligns with content */
 .topbar{background:#2b2f36;border-bottom:1px solid rgba(0,0,0,0.2)}
 .topbar .topbar-inner{max-width:var(--maxw);margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
-.top-nav a{color:var(--muted);margin:0 12px;font-size:15px}
+.brand{font-weight:700}
+.top-nav a{color:var(--muted);margin:0 14px;font-size:15px}
+.top-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{background:transparent;border:0;color:var(--muted);padding:6px;border-radius:6px;cursor:pointer}
 
-/* Sidebar (shrunken to allow right side to be wider) */
-.avatar-wrap{width:180px;height:180px;border-radius:999px;overflow:hidden;margin:0 auto 18px auto;border:8px solid rgba(0,0,0,0.25);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
-.name{font-weight:700;margin:10px 0 6px 0;text-align:center;font-size:22px}
+/* Sidebar / left column
+   - scaled down avatar to match reduced left column */
+.sidebar .profile-card{background:transparent;padding:0}
+.avatar-wrap{width:200px;height:200px;border-radius:999px;overflow:hidden;margin:0 auto 18px auto;border:8px solid rgba(0,0,0,0.25);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.name{font-family:'Merriweather', serif;font-weight:700;margin:10px 0 6px 0;text-align:center;font-size:26px}
 .subtitle{color:var(--muted);text-align:center;margin-bottom:6px}
+.affiliation{display:block;text-align:center;margin:8px 0 14px 0;color:var(--accent)}
+.icons{display:flex;gap:14px;justify-content:center;margin-top:8px}
+.icons a{color:var(--muted);display:inline-flex;align-items:center;gap:8px;font-weight:600}
 
-/* Right column layout: column flex so footer can stick to bottom */
-.content{display:flex;flex-direction:column;min-height:0}
-
-/* ---------- CARDS: force them to expand horizontally ---------- */
-.card{
-  background:var(--panel);
-  padding:28px;
-  border-radius:var(--radius);
-  box-shadow:0 8px 30px rgba(0,0,0,0.45);
-  margin-bottom:18px;
-  color:var(--text);
-
-  /* ensure each card can grow to fill the wide content column */
-  width:100%;
-  max-width:none;
-  box-sizing:border-box;
+/* Right column: make it a column so footer can be pushed to bottom */
+.content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* important for flex children in a grid */
 }
 
-/* The two-column block (Interests / Education) should fill content width */
+/* ---------- CARD STYLES (comfortable padding) ---------- */
+.content .card,
+.card {
+  background: var(--panel);
+  padding: 28px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  margin-bottom: 18px;
+  color: var(--text);
+}
+
+/* Biography header slightly larger on wide layout */
+.bio.card h2{font-size:40px;margin:0 0 16px 0}
+.bio.card p{line-height:1.7;color:var(--muted);font-size:18px}
+
+/* two-column interests / education
+   - each .card flexes to use available width so lines become longer */
 .two-column{
   display:flex;
   gap:32px;
   margin-top:16px;
-  align-items:flex-start;
+  align-items: flex-start;
 }
 .two-column .card{
-  flex: 1 1 0;   /* both cards share the wide space */
-  min-width: 0;  /* allow proper shrinking */
+  flex: 1 1 0; /* allow both cards to expand equally */
+  min-width: 0; /* prevents overflow and allows proper shrinking */
 }
 
-/* Typography tweaks for wide layout */
-.bio.card h2{font-size:40px;margin:0 0 16px 0}
-.bio.card p{line-height:1.7;color:var(--muted);font-size:18px}
+/* card headings and lists */
+.card h3{margin:0 0 10px 0}
+.card ul{margin:0;padding-left:20px;color:var(--muted)}
+.edu-list li{margin-bottom:12px}
+.edu-list .muted{font-size:14px;color:var(--muted)}
 
-/* Footer pinned to bottom of content column */
-.content .footer{margin-top:auto;padding-top:8px}
-.footer .muted{color:var(--muted)}
+/* ---------- Footer pinned to bottom of right column ---------- */
+.content .footer {
+  margin-top: auto; /* footer sits at bottom when content is short */
+  padding-top: 8px;
+}
 
-/* Responsive: on smaller screens revert to single column with reasonable widths */
+/* footer text styling */
+.footer .muted { color: var(--muted); }
+
+/* small tweaks / responsive */
+.muted{color:var(--muted)}
+.small{font-size:13px;color:var(--muted)}
+
+/* Responsive adjustments */
+@media (max-width:1400px){
+  /* a moderate breakpoint: reduce max width so it stays comfortable */
+  :root { --maxw:1200px; }
+}
+
 @media (max-width:1200px){
-  .container{grid-template-columns:260px 1fr; gap:28px; max-width:1200px}
-  .avatar-wrap{width:200px;height:200px}
+  :root { --maxw:1100px; }
+  .container{grid-template-columns:300px 1fr; gap:28px;}
+  .avatar-wrap{width:240px;height:240px}
+  .name{font-size:28px}
   .bio.card h2{font-size:36px}
   .bio.card p{font-size:16px}
 }
+
 @media (max-width:980px){
   .container{grid-template-columns:1fr;gap:20px;padding:0 16px}
+  .topbar .topbar-inner{padding-left:12px;padding-right:12px}
   .avatar-wrap{width:160px;height:160px}
   .name{font-size:22px}
   .bio.card h2{font-size:28px}
