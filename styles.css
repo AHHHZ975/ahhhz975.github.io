@@ -1,7 +1,6 @@
 :root{
-  --bg:#2b2f36;           /* page background behind header */
-  --panel:#32353d;        /* card background */
-  --page-bg:#2f3117;      /* main background (unused but kept) */
+  --bg:#2b2f36;
+  --panel:#32353d;
   --muted:#a9b1bb;
   --text:#eef5fb;
   --accent:#9cc9ff;
