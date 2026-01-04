@@ -1,6 +1,5 @@
 // Year injection
 const year = document.getElementById('year') || (function(){
-  // Create fallback year element in footer if missing
   const footer = document.querySelector('.footer');
   if(footer){
     const span = document.createElement('span');
