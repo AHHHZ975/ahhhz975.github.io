@@ -6,7 +6,7 @@
   --accent:#9cc9ff;
   --accent-2:#86e6c1;
   --radius:10px;
-  --maxw:1300px; /* increased from 1100px */
+  --maxw:1400px; /* increased so content can be wider on large screens */
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
@@ -30,15 +30,15 @@ main.page {
 a{color:var(--accent);text-decoration:none}
 
 /* Grid container: left column + right content
-   - max-width increased to allow wider content
-   - left column is slightly wider to keep proportions pleasant */
+   - left column reduced so right column gets more horizontal space
+   - overall container max width increased above */
 .container{
   max-width:var(--maxw);
   margin:32px auto;
   padding:0 20px;
   display:grid;
-  grid-template-columns:340px 1fr; /* left column widened from 300px -> 340px */
-  gap:32px; /* slightly larger gap */
+  grid-template-columns:260px 1fr; /* reduced left column width to give content more room */
+  gap:36px; /* slightly larger gap */
   align-items:start;
   min-height: 0;
 }
@@ -51,11 +51,12 @@ a{color:var(--accent);text-decoration:none}
 .top-actions{display:flex;gap:8px;align-items:center}
 .icon-btn{background:transparent;border:0;color:var(--muted);padding:6px;border-radius:6px;cursor:pointer}
 
-/* Sidebar / left column */
+/* Sidebar / left column
+   - scaled down avatar to match reduced left column */
 .sidebar .profile-card{background:transparent;padding:0}
-.avatar-wrap{width:280px;height:280px;border-radius:999px;overflow:hidden;margin:0 auto 18px auto;border:10px solid rgba(0,0,0,0.25);box-shadow:0 8px 28px rgba(0,0,0,0.6)}
+.avatar-wrap{width:200px;height:200px;border-radius:999px;overflow:hidden;margin:0 auto 18px auto;border:8px solid rgba(0,0,0,0.25);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
 .avatar-wrap img{width:100%;height:100%;object-fit:cover;display:block}
-.name{font-family:'Merriweather', serif;font-weight:700;margin:10px 0 6px 0;text-align:center;font-size:30px}
+.name{font-family:'Merriweather', serif;font-weight:700;margin:10px 0 6px 0;text-align:center;font-size:26px}
 .subtitle{color:var(--muted);text-align:center;margin-bottom:6px}
 .affiliation{display:block;text-align:center;margin:8px 0 14px 0;color:var(--accent)}
 .icons{display:flex;gap:14px;justify-content:center;margin-top:8px}
@@ -68,30 +69,41 @@ a{color:var(--accent);text-decoration:none}
   min-height: 0; /* important for flex children in a grid */
 }
 
-/* ---------- CARD STYLES (increased inner spacing) ---------- */
+/* ---------- CARD STYLES (comfortable padding) ---------- */
 .content .card,
 .card {
   background: var(--panel);
-  padding: 28px;               /* comfortable inner spacing */
+  padding: 28px;
   border-radius: var(--radius);
   box-shadow: 0 8px 30px rgba(0,0,0,0.45);
   margin-bottom: 18px;
   color: var(--text);
 }
 
-/* Keep biography heading sizing proportional on larger layout */
+/* Biography header slightly larger on wide layout */
 .bio.card h2{font-size:40px;margin:0 0 16px 0}
 .bio.card p{line-height:1.7;color:var(--muted);font-size:18px}
 
-/* two-column interests / education */
-.two-column{display:flex;gap:32px;margin-top:16px}
+/* two-column interests / education
+   - each .card flexes to use available width so lines become longer */
+.two-column{
+  display:flex;
+  gap:32px;
+  margin-top:16px;
+  align-items: flex-start;
+}
+.two-column .card{
+  flex: 1 1 0; /* allow both cards to expand equally */
+  min-width: 0; /* prevents overflow and allows proper shrinking */
+}
+
+/* card headings and lists */
 .card h3{margin:0 0 10px 0}
 .card ul{margin:0;padding-left:20px;color:var(--muted)}
 .edu-list li{margin-bottom:12px}
 .edu-list .muted{font-size:14px;color:var(--muted)}
 
 /* ---------- Footer pinned to bottom of right column ---------- */
-/* Push footer to the bottom of the .content column */
 .content .footer {
   margin-top: auto; /* footer sits at bottom when content is short */
   padding-top: 8px;
@@ -104,9 +116,13 @@ a{color:var(--accent);text-decoration:none}
 .muted{color:var(--muted)}
 .small{font-size:13px;color:var(--muted)}
 
-/* responsive adjustments */
+/* Responsive adjustments */
+@media (max-width:1400px){
+  /* a moderate breakpoint: reduce max width so it stays comfortable */
+  :root { --maxw:1200px; }
+}
+
 @media (max-width:1200px){
-  /* at medium widths reduce max width to avoid cramped layout on small laptops */
   :root { --maxw:1100px; }
   .container{grid-template-columns:300px 1fr; gap:28px;}
   .avatar-wrap{width:240px;height:240px}
