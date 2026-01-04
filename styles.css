@@ -95,12 +95,12 @@ a{color:var(--accent);text-decoration:none}
 
 /* Interests + Education width tuning */
 .two-column .interests{
-  flex: 0.8 1 0;   /* slightly narrower */
+  flex: 0.9 1 0;   /* slightly narrower */
   min-width: 0;
 }
 
 .two-column .education{
-  flex: 1.2 1 0;   /* slightly wider */
+  flex: 1.1 1 0;   /* slightly wider */
   min-width: 0;
 }
 
