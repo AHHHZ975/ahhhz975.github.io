@@ -6,7 +6,7 @@
   --accent:#9cc9ff;
   --accent-2:#86e6c1;
   --radius:10px;
-  --maxw:1400px; /* increased so content can be wider on large screens */
+  --maxw:1600px; /* increased so content can be wider on large screens */
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
