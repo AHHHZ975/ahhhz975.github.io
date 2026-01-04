@@ -1,49 +1,75 @@
-// Inject current year
-const yearEl = document.getElementById('year');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+// Year injection
+const year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
 
-// Profile photo preview (client-side only — does not upload)
-const input = document.getElementById('upload-photo');
-const img = document.getElementById('profile-pic');
-if (input && img) {
-  input.addEventListener('change', e => {
-    const file = e.target.files && e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => { img.src = reader.result; };
-    reader.readAsDataURL(file);
+// Theme toggle (persist)
+const themeToggle = document.getElementById('theme-toggle');
+function setTheme(name){
+  if(name === 'light') {
+    document.documentElement.style.setProperty('--bg','#f6f7f9');
+    document.documentElement.style.setProperty('--panel','#ffffff');
+    document.documentElement.style.setProperty('--page-bg','#f6f7f9');
+    document.documentElement.style.setProperty('--muted','#6b7280');
+    document.documentElement.style.setProperty('--text','#0b1220');
+    document.documentElement.style.setProperty('--accent','#2b6cb0');
+    localStorage.setItem('site-theme','light');
+    themeToggle.setAttribute('aria-pressed','true');
+  } else {
+    // restore default dark (we rely on CSS defaults)
+    localStorage.setItem('site-theme','dark');
+    themeToggle.setAttribute('aria-pressed','false');
+    // For simplicity we reload the page variables by removing inline overrides:
+    document.documentElement.style.removeProperty('--bg');
+    document.documentElement.style.removeProperty('--panel');
+    document.documentElement.style.removeProperty('--page-bg');
+    document.documentElement.style.removeProperty('--muted');
+    document.documentElement.style.removeProperty('--text');
+    document.documentElement.style.removeProperty('--accent');
+  }
+}
+
+if(themeToggle){
+  const saved = localStorage.getItem('site-theme') || 'dark';
+  setTheme(saved === 'light' ? 'light' : 'dark');
+  themeToggle.addEventListener('click', () => {
+    const current = localStorage.getItem('site-theme') === 'light' ? 'light' : 'dark';
+    setTheme(current === 'light' ? 'dark' : 'light');
   });
 }
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const hash = a.getAttribute('href');
-    if (hash && hash.length > 1) {
-      e.preventDefault();
-      const target = document.querySelector(hash);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// Search overlay
+const searchBtn = document.getElementById('search-btn');
+const searchOverlay = document.getElementById('search-overlay');
+const closeSearch = document.getElementById('close-search');
+const searchInput = document.getElementById('search-input');
+
+if(searchBtn && searchOverlay){
+  searchBtn.addEventListener('click', () => {
+    searchOverlay.hidden = false;
+    // focus input after a short delay
+    setTimeout(()=> searchInput && searchInput.focus(), 80);
+  });
+}
+if(closeSearch){
+  closeSearch.addEventListener('click', ()=> searchOverlay.hidden = true);
+}
+if(searchOverlay){
+  searchOverlay.addEventListener('click', (e)=>{
+    if(e.target === searchOverlay) searchOverlay.hidden = true;
+  });
+}
+
+// Smooth scroll for page anchors
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const href = a.getAttribute('href');
+    if(!href || href === '#') return;
+    if(href.startsWith('#')){
+      const el = document.querySelector(href);
+      if(el){
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
     }
   });
 });
-
-// Highlight active nav link based on scroll
-const sectionLinks = Array.from(document.querySelectorAll('.nav-links a'));
-function onScroll() {
-  const fromTop = window.scrollY + 80;
-  sectionLinks.forEach(link => {
-    const id = link.getAttribute('href');
-    if (!id || id.length <= 1) return;
-    const section = document.querySelector(id);
-    if (!section) return;
-    const top = section.offsetTop;
-    const bottom = top + section.offsetHeight;
-    if (fromTop >= top && fromTop < bottom) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-}
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
