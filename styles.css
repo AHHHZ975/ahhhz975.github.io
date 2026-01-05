@@ -37,7 +37,7 @@ a{color:var(--accent);text-decoration:none}
   margin:32px auto;
   padding:0 20px;
   display:grid;
-  grid-template-columns:260px 1fr; /* reduced left column width to give content more room */
+  grid-template-columns:290px 1fr; /* reduced left column width to give content more room */
   gap:36px; /* slightly larger gap */
   align-items:start;
   min-height: 0;
