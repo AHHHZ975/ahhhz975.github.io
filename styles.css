@@ -114,6 +114,15 @@ a{color:var(--accent);text-decoration:none}
   margin-bottom: 0;
 }
 
+/* add one line (gap) between publication items */
+.pub-list li {
+  margin-bottom: 12px; /* adjust 8/12/16px to taste */
+}
+.pub-list li:last-child {
+  margin-bottom: 0;
+}
+
+
 /* card headings and lists */
 .card h3{margin:0 0 10px 0}
 .card ul{margin:0;padding-left:20px;color:var(--muted)}
