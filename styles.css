@@ -89,7 +89,7 @@ a{color:var(--accent);text-decoration:none}
 .two-column{
   display:flex;
   gap:32px;
-  margin-top:16px;
+  margin-top:10px;
   align-items: flex-start;
 }
 
