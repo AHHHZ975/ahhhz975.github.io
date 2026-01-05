@@ -114,11 +114,10 @@ a{color:var(--accent);text-decoration:none}
   margin-bottom: 0;
 }
 
-/* add one line (gap) between publication items */
-.pub-list li {
-  margin-bottom: 12px; /* adjust 8/12/16px to taste */
+.publications ul li {
+  margin-bottom: 12px;
 }
-.pub-list li:last-child {
+.publications ul li:last-child {
   margin-bottom: 0;
 }
 
