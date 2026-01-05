@@ -114,12 +114,21 @@ a{color:var(--accent);text-decoration:none}
   margin-bottom: 0;
 }
 
-.publications ul li {
-  margin-bottom: 12px;
+/* space between publication items */
+.pub-list li {
+  margin-bottom: 12px;    /* ~one line of vertical space; change to 8/16px to taste */
 }
-.publications ul li:last-child {
+.pub-list li:last-child {
   margin-bottom: 0;
 }
+
+/* small polish for links inside each publication */
+.pub-links {
+  margin-top: 6px;
+  font-size: 14px;
+}
+.pub-links a { color: var(--accent); text-decoration: none; }
+.pub-links a:hover { text-decoration: underline; }
 
 
 /* card headings and lists */
